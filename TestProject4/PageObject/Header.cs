@@ -24,7 +24,6 @@ namespace TestProject4.PageObject
         private By _sortDropDownChoise = By.CssSelector("#selectProductSort > option:nth-child(7)");
         private By _cartButton = By.CssSelector("#header > div:nth-child(3) > div > div > div:nth-child(3) > div > a");
         private By _womenDropDown = By.CssSelector("#block_top_menu > ul > li:nth-child(1)");
-        private By _womenDropDownBlouses = By.CssSelector("#block_top_menu > ul > li:nth-child(1) > ul > li:nth-child(1) > ul > li.sfHoverForce > a");
         private By _dressDropDown = By.ClassName("sf-with-ul");
         private By _dressSummer = By.LinkText("Summer Dresses");
         public Header ContactUseClick()
@@ -79,14 +78,17 @@ namespace TestProject4.PageObject
         }
         public WomenDropDownBlouses WomenDropDownBlouses()
         {
-            Action action = new Action(_driver);
-            //_driver.FindElement(_womenDropDown);
-            //_driver.FindElement(_womenDropDownBlouses).Click();
+            Actions action = new Actions(_driver);
+            IWebElement element = _driver.FindElement(_womenDropDown);
+            action.MoveToElement(element).Perform();
+            _driver.FindElement(_womenDropDown).Click();
             return new WomenDropDownBlouses(_driver);
         }
         public DressesSummer DressesSummer()
         {
-            _driver.FindElement(_dressDropDown);
+            Actions action = new Actions(_driver);
+            IWebElement element = _driver.FindElement(_dressDropDown);
+            action.MoveToElement(element).Perform();
             _driver.FindElement(_dressSummer).Click();
             return new DressesSummer(_driver);
         }
